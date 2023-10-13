@@ -1,0 +1,6 @@
+1=Foyer=This is were you initally entered. You hear a TV on in another room.=false=0=4=0=2
+2=Kitchen=Everything looks nostalgic but liminal. Someone is boiling water.=false=0=3=1=0
+3=Dining Room=The room looks cozy but eerie. You still hear the TV in the background.=false=2=0=4=0
+4=Living Room=The TV in here is playing old cartoons. The couches look comfy.=false=1=0=5=3
+5=Bedroom=The bed is unmade. There's some family photos of people you don't recognize on the nightstand.=false=6=0=0=4
+6=Bathroom=The lights dont work. The bathroom looks extremely unclean compared to the rest of the house.=false=0=5=0=0

@@ -1,0 +1,25 @@
+The layout of the Map in simple terms:
+
+[2] [1] [6]
+[3] [4] [5]
+
+
+Envisioned as an actual floorplan:
+        _________
+       |         |
+ ______|    1    |______
+|      |         |  6   |
+|  2   |_________|______|___
+|______|         |          |
+|      |         |    5     |
+|  3   |    4    |__________|
+|      |         |
+|______|_________|
+
+
+1 - Foyer
+2 - Kitchen
+3 - Dining Room
+4 - Living Room
+5 - Bedroom
+6 - Bathroom

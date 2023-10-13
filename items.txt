@@ -1,0 +1,3 @@
+Key,This is a Blue Key
+Sword,This is a cool looking sword
+Wallet,There is 50$ in this wallet
