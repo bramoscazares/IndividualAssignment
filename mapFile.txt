@@ -34,5 +34,5 @@ Room #      Room Name                 [Direction]   Connection              Item
                                                                             Soda
                                                                             Jersey
 --------------------------------------------------------------------------------------------------------
-6           Bathroom                    [South]     Bedroom                 Toiletpaper        Puzzle1
+6           Bathroom                    [South]     Bedroom                 Toiletpaper         Puzzle1
 --------------------------------------------------------------------------------------------------------
