@@ -13,22 +13,26 @@ Map Details:
 
 Room #      Room Name                 [Direction]   Connection              Items               Puzzle
 --------------------------------------------------------------------------------------------------------
-1           Foyer                       [South]     Living Room
+1           Foyer                       [South]     Living Room             Shoes
                                         [West]      Kitchen
 --------------------------------------------------------------------------------------------------------
 2           Kitchen                     [South]     Dining Room             PotatoChips
                                         [East]      Foyer                   MoldyApple
                                                                             FamilyPhoto
+                                                                            FancySpoons
 --------------------------------------------------------------------------------------------------------
-3           Dining Room                 [North]     Kitchen
+3           Dining Room                 [North]     Kitchen                 RetroRadio
                                         [East]      Living Room
 --------------------------------------------------------------------------------------------------------
 4           Living Room                 [North]     Foyer                   Wallet
                                         [East]      Bedroom                 Remote
                                         [West]      Dining Room             CarKeys
+                                                                            TV
 --------------------------------------------------------------------------------------------------------
-5           Bedroom                     [North]     Bathroom
-                                        [West]      Living Room
+5           Bedroom                     [North]     Bathroom                Diamond
+                                        [West]      Living Room             Journal
+                                                                            Soda
+                                                                            Jersey
 --------------------------------------------------------------------------------------------------------
-6           Bathroom                    [South]     Bedroom                                     Puzzle1
+6           Bathroom                    [South]     Bedroom                 Toiletpaper        Puzzle1
 --------------------------------------------------------------------------------------------------------
