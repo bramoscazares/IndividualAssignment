@@ -13,6 +13,7 @@ public class Room {
     private int roomWest;
 
     private ArrayList<Item> roomInventory = new ArrayList<>();
+    private Puzzle roomPuzzle;
 
 
     //CONSTRUCTOR ==============================
@@ -96,7 +97,16 @@ public class Room {
 
     public ArrayList<Item> getRoomInventory(){ return roomInventory; }
 
+    public void setRoomPuzzle(Puzzle puzzle){
+        this.roomPuzzle = puzzle;
+    }
+    public Puzzle getRoomPuzzle(){
+        return roomPuzzle;
+    }
 
+
+
+    //ToString ================================================
     @Override
     public String toString() {
         return room + " " + roomName;

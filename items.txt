@@ -1,3 +1,8 @@
-Key,This is a Blue Key
-Sword,This is a cool looking sword
-Wallet,There is 50$ in this wallet
+PotatoChips=These chips are lime flavored. Yum.=2
+Wallet=There is 50$ in this wallet. Nice.=4
+Journal=You read the journal. Looks like someone is going through it.=5
+Diamond=Jackpot! This is going to make me rich.=5
+MoldyApple=Gross. Why haven't these people thrown this away already?=2
+FamilyPhoto=This was on the fridge of the kitchen. It looks like a happy family.=2
+Remote=This is for the TV in the living room, it doesn't have any batteries=4
+CarKeys=This looks like it belongs to the old rusty truck outside. Wonder if it works...=4

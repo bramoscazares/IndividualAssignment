@@ -1,0 +1,12 @@
+This is a list of all game commands:
+[Command name]      -[Command Description]
+--------------------------------------------------------------------------------------------------------------
+'help'              - Prints a list of all availible commands implemented for this game.
+'rooms'             - Prints a list of all availible rooms on this map.
+'go [direction]'    - Moves the player to the [north/south/east/west] direction. You can also input [n/s/e/w].
+'explore'           - Prints all available items in a room, if the room has any.
+'pickup [item]'     - Picks up [item name] in a room and adds it to player's inventory, provided the room has the item.
+'inventory'         - Prints a list of all items in the player's inventory.
+'inspect [item]'    - Prints a description of [item name] provided that the item is in the player's inventory.
+'drop [item]'       - Drops [item name] from player's inventory and into the current room.
+--------------------------------------------------------------------------------------------------------------
