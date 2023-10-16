@@ -145,7 +145,7 @@ public class Game {
         } else if (movement.equalsIgnoreCase("e") || movement.equalsIgnoreCase("east")) {
             System.out.println("You head east.");
             checkMove(currentRoom.getRoomEast());
-        } else if (movement.equalsIgnoreCase("w") || movement.equalsIgnoreCase("south")) {
+        } else if (movement.equalsIgnoreCase("w") || movement.equalsIgnoreCase("west")) {
             System.out.println("You head west.");
             checkMove(currentRoom.getRoomWest());
         } else {
