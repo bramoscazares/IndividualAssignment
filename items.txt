@@ -5,4 +5,11 @@ Diamond=Jackpot! This is going to make me rich.=5
 MoldyApple=Gross. Why haven't these people thrown this away already?=2
 FamilyPhoto=This was on the fridge of the kitchen. It looks like a happy family.=2
 Remote=This is for the TV in the living room, it doesn't have any batteries=4
-CarKeys=This looks like it belongs to the old rusty truck outside. Wonder if it works...=4
+CarKeys=Wonder what it belongs too. There was no vehicle outside...=4
+TV=This is the 60' flat screen tv you found in the living room.=4
+FancySpoons=These look too luxurious to be in a place like this. What did the homeowner eat with these?=2
+RetroRadio=This is retro radio from the 80's. It has a Billy Idol cassette. Pretty cool.=3
+Jersey=This looks like a signed jersey of a famous football player.=5
+Toiletpaper=The homeowner only had one roll left. Don't think they'll be needing this.=6
+Shoes=This was from the shoe rack in the foyer. They're high quality, looks like the owner takes good care of these.=1
+Soda=This bottle is empty. It was found under the bed in the bedroom.=5
