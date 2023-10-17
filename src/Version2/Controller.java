@@ -74,7 +74,7 @@ public class Controller {
 
         //Loops till attempts run out
         for (int i = puzzle.numAttempts; i > 0; i--){
-            System.out.print("Enter Answer:");
+            System.out.print("Enter Answer: ");
             String userAnswer = input.nextLine();
 
             //If answer is correct~
