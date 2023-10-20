@@ -219,6 +219,10 @@ public class Game {
 
     }  //Verifies and prints description of item in player's inventory
 
+    public Boolean inventoryCheck(){
+        if(player.playerInventory.equals(itemArrayList)){return true;}
+        return false;
+    }
 
     //RANDOM TEST METHOD
     public void test(){

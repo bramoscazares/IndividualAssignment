@@ -59,4 +59,8 @@ public class Display {
         System.out.println("\n--------------------------------------------------------------------------------------------------------------");
     } //Personal styling for the user
 
+    public void printCompleteRobbery(){
+        System.out.println("Congratulations! You robbed this man blind!\n\nThank you for playing!");
+    }
+
 }

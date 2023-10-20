@@ -24,7 +24,9 @@ public class Controller {
             //Prints room description
             display.displayRoomInfo(game.getCurrentRoom());
 
+
             puzzleCheck(); //Checks if Room has a puzzle
+            checkInventory();
 
             System.out.println("What would you like to do? Type 'help' for commands.");
             String userInput = input.nextLine();
@@ -90,6 +92,13 @@ public class Controller {
         //After all failed attempts
         System.out.println("Failed to solve.\nDang, I'll try later.");
     }  //Main Puzzle Interface
+
+    public void checkInventory(){
+        if(game.inventoryCheck()){
+            gameOver = true;
+            display.printCompleteRobbery();
+        }
+    }
 
 
 }

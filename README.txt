@@ -4,14 +4,14 @@ Welcome to the mini text-based adventure game called "House Reaper".
 SUMMARY: -----------------------------------------------------------------------------------------------------
 
 This is a text-based adventure game called "House Reaper", where you play as a burglar stealing items while
-the homeowner is away on vacation.
+the homeowner is away.
 
 This homeowner is away on a business trip, and you take advantage of this opportunity to raid his home and
 get yourself some treasures you can sell for cash.
 
 SETUP: -----------------------------------------------------------------------------------------------------
 
-This game requires the text files for a normal playthrough:
+This game requires the following text files for a normal playthrough:
 
 "rooms.txt":
     This file has all information for the ROOMS on the map.
