@@ -23,17 +23,6 @@ public class Game {
 
 
 
-    public Game(File rooms, File items, File puzzles, File commands) throws FileNotFoundException {
-        populateRooms(rooms);
-        populateItems(items);
-        populatePuzzles(puzzles);
-        populateCommands(commands);
-        fillrooms();
-        currentRoom = roomLinkedList.get(0);
-        //test();
-    }
-
-
     // GAME SET UP =================================
     protected void populateItems(File file) throws FileNotFoundException {
         //Scans file
@@ -128,12 +117,13 @@ public class Game {
         }
     } //Adds items and Puzzles into designated rooms
 
+    public void setFirstRoom(){
+        currentRoom = roomLinkedList.get(0);
+    }
+
 
     // GAME COMMAND LOGIC =================================
-    public void move(String moveString){
-        //Breaks up 'go [direction]'
-        String[] moveStrings = moveString.split(" ");
-        String movement = moveStrings[1]; //[direction]
+    public void move(String movement) throws ArrayIndexOutOfBoundsException {
 
         //processes direction;
         if (movement.equalsIgnoreCase("n") || movement.equalsIgnoreCase("north")) {
@@ -166,10 +156,7 @@ public class Game {
     public Room getCurrentRoom(){ return currentRoom; } //GETTER
     public void setCurrentRoom(Room room){ this.currentRoom = room; } //SETTER
 
-    public void pickupItem(String pickupString){
-        //Breaks up 'pickup [item name]'
-        String[] itemString = pickupString.split(" ");
-        String itemName = itemString[1]; //[item name]
+    public void pickupItem(String itemName){
 
         //Checks if room has [item name] and adds to Player's inventory
         for (Item roomitem : currentRoom.getRoomInventory()){
@@ -183,10 +170,7 @@ public class Game {
         System.out.println("Item not in room");
     } //Picks up item from room and adds to player inventory
 
-    public void dropItem(String dropString){
-        //Breaks up 'drop [item name]'
-        String[] itemString = dropString.split(" ");
-        String itemName = itemString[1];
+    public void dropItem(String itemName){
 
         //Checks if item is in player's inventory and adds it to room's inventory
         for(Item i: player.playerInventory){
@@ -202,10 +186,7 @@ public class Game {
         System.out.println("This item is not in your pockets.");
     } //Drops item from player inventory into Room Inventory
 
-    public void inspectItem(String inspectString){
-        //breaks up 'inspect [item name]'
-        String[] itemString = inspectString.split(" ");
-        String itemName = itemString[1];
+    public void inspectItem(String itemName){
 
         //Makes sure item is in player's inventory before printing [item name]'s description
         for(Item i: player.playerInventory){
@@ -223,6 +204,7 @@ public class Game {
         if(player.playerInventory.equals(itemArrayList)){return true;}
         return false;
     }
+
 
     //RANDOM TEST METHOD
     public void test(){

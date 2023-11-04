@@ -38,10 +38,13 @@ public class Controller {
     } //This method starts the game and loops indefinitely until user quits.
 
     public void userCommand(String input){
+        input = input.toLowerCase();
+        String item = splitCommand(input);
+
         if (input.equalsIgnoreCase("quit")){
             gameOver = true;
         } else if (input.contains("go")) {
-            game.move(input);
+            game.move(item);
         } else if (input.equalsIgnoreCase("help")) {
             display.displayHelp(game.gameCommands);
         } else if (input.equalsIgnoreCase("rooms")) {
@@ -51,11 +54,11 @@ public class Controller {
         } else if (input.contains("inventory")) {
             display.printInventory(game.player);
         } else if (input.contains("pickup")) {
-            game.pickupItem(input);
+            game.pickupItem(item);
         } else if (input.contains("inspect")) {
-            game.inspectItem(input);
+            game.inspectItem(item);
         } else if (input.contains("drop")) {
-            game.dropItem(input);
+            game.dropItem(item);
         } else {
             System.out.println("Invalid Command. Try again.");
         }
@@ -98,6 +101,14 @@ public class Controller {
             gameOver = true;
             display.printCompleteRobbery();
         }
+    }
+
+    public String splitCommand(String string){
+        String[] listString = string.split(" ");
+
+        if(listString.length>1){ return listString[1]; }
+
+        return string;
     }
 
 
