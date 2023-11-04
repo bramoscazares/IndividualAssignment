@@ -59,9 +59,9 @@ public class Controller {
             game.inspectItem(item);
         } else if (input.contains("drop")) {
             game.dropItem(item);
-        } else if (input.contains("equip")) {
+        } else if (input.startsWith("equip")) {
             game.equipItem(item);
-        } else if (input.contains("unequip")) {
+        } else if (input.startsWith("unequip")) {
             game.unequipItem(item);
         } else if (input.contains("status")) {
             display.printPlayerStatus(game.player);

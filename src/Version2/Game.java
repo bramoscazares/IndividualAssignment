@@ -258,7 +258,7 @@ public class Game {
                 return;
             }
         }
-        System.out.println("This item is not in your pockets.");
+        System.out.println("You do not have this item equipped.");
     }
 
     public void moveAllItems(ArrayList<Item> removeFrom,ArrayList<Item> addToo){
