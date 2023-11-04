@@ -50,7 +50,7 @@ public class Display {
             System.out.println("You check your pockets: ");
             for (Item item : player.playerInventory){ System.out.println(item.getItemName()); }
         } else {
-            System.out.println("Huh? Your pockets are empty.");
+            System.out.println("\nHuh? Your pockets are empty.");
             System.out.println("You didn’t pickup any items yet.");
         }
     } //Displays list of items in a player's Inventory
@@ -61,6 +61,21 @@ public class Display {
 
     public void printCompleteRobbery(){
         System.out.println("Congratulations! You robbed this man blind!\n\nThank you for playing!");
+    }
+
+    public void printPlayerStatus(Player player){
+        System.out.println("\nCurrent Player Status:");
+        System.out.println("---------------------------------");
+        System.out.println("HP  : " + player.healthPoints);
+        System.out.println("ATK : " + player.getAttackPoints());
+        System.out.println("Equipped: ");
+        if(!player.equippedInventory.isEmpty()){
+            for(Item i: player.equippedInventory){
+                System.out.println(i.getItemName() + " (+" + i.getAttackPoints()+ ")");
+            }
+        }
+
+
     }
 
 }

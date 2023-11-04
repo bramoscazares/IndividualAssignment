@@ -11,7 +11,7 @@ Map Details:
 |______|_________|
 
 
-Room #      Room Name                 [Direction]   Connection              Items               Puzzle
+Room #      Room Name                 [Direction] - Connection              Items               Puzzle
 --------------------------------------------------------------------------------------------------------
 1           Foyer                       [South]     Living Room             Shoes
                                         [West]      Kitchen

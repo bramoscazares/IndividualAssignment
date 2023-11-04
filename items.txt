@@ -1,4 +1,4 @@
-PotatoChips=These chips are lime flavored. Yum.=2
+PotatoChips=These chips are lime flavored. Yum.=2=
 Wallet=There is 50$ in this wallet. Nice.=4
 Journal=You read the journal. Looks like someone is going through it.=5
 Diamond=Jackpot! This is going to make me rich.=5

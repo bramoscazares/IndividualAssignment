@@ -26,7 +26,7 @@ public class Controller {
 
 
             puzzleCheck(); //Checks if Room has a puzzle
-            checkInventory();
+            //checkInventory();
 
             System.out.println("What would you like to do? Type 'help' for commands.");
             String userInput = input.nextLine();
@@ -59,6 +59,12 @@ public class Controller {
             game.inspectItem(item);
         } else if (input.contains("drop")) {
             game.dropItem(item);
+        } else if (input.contains("equip")) {
+            game.equipItem(item);
+        } else if (input.contains("unequip")) {
+            game.unequipItem(item);
+        } else if (input.contains("status")) {
+            display.printPlayerStatus(game.player);
         } else {
             System.out.println("Invalid Command. Try again.");
         }

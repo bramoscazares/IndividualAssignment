@@ -1,0 +1,4 @@
+i1=Description.=1=Consumable=20=1
+i2=Description.=1=Equippable=0=30
+i3=Description.=1=Equippable=0=50
+i4=Description.=1=Consumable=10=5

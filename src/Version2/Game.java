@@ -36,8 +36,11 @@ public class Game {
             String itemName = tempArray[0];
             String itemDescription = tempArray[1];
             int itemRoomLocation = Integer.parseInt(tempArray[2]);
+            String itemType = tempArray[3];
+            int healthPoints = Integer.parseInt(tempArray[4]);
+            int attackPoints = Integer.parseInt(tempArray[5]);
 
-            this.itemArrayList.add(new Item(itemName, itemDescription,itemRoomLocation)); //Adds item to array
+            this.itemArrayList.add(new Item(itemName, itemDescription,itemRoomLocation,itemType,healthPoints,attackPoints)); //Adds item to array
         }
     }  //Adds Items into an ArrayList
 
@@ -158,6 +161,11 @@ public class Game {
 
     public void pickupItem(String itemName){
 
+        if (itemName.equalsIgnoreCase("all")){
+            moveAllItems(currentRoom.getRoomInventory(),player.playerInventory);
+            return;
+        }
+
         //Checks if room has [item name] and adds to Player's inventory
         for (Item roomitem : currentRoom.getRoomInventory()){
             if (roomitem.getItemName().equalsIgnoreCase(itemName)){
@@ -171,6 +179,11 @@ public class Game {
     } //Picks up item from room and adds to player inventory
 
     public void dropItem(String itemName){
+
+        if (itemName.equalsIgnoreCase("all")){
+            moveAllItems(player.playerInventory,currentRoom.getRoomInventory());
+            return;
+        }
 
         //Checks if item is in player's inventory and adds it to room's inventory
         for(Item i: player.playerInventory){
@@ -203,6 +216,66 @@ public class Game {
     public Boolean inventoryCheck(){
         if(player.playerInventory.equals(itemArrayList)){return true;}
         return false;
+    }
+
+    public void equipItem(String itemName){
+
+        if (itemName.equalsIgnoreCase("all")){
+            moveAllItems(player.playerInventory,player.equippedInventory);
+            moveEquipPoints("add");
+            return;
+        }
+
+        //Checks if item is in player's inventory and adds it to room's inventory
+        for(Item i: player.playerInventory){
+            if (i.getItemName().equalsIgnoreCase(itemName)){
+                player.equippedInventory.add(i);
+                player.playerInventory.remove(i);
+                //player.attackPoints += i.behaviorPoints;
+                player.setAttackPoints(player.attackPoints +i.getAttackPoints());
+                System.out.println(i.getItemName()+ " is equipped!");
+                return;
+            }
+        }
+        System.out.println("This item is not in your pockets.");
+    }
+
+    public void unequipItem(String itemName){
+
+        if (itemName.equalsIgnoreCase("all")){
+            moveEquipPoints("remove");
+            moveAllItems(player.equippedInventory,player.playerInventory);
+            return;
+        }
+
+        //Checks if item is in player's inventory and adds it to room's inventory
+        for(Item i: player.equippedInventory){
+            if (i.getItemName().equalsIgnoreCase(itemName)){
+                player.equippedInventory.remove(i);
+                player.playerInventory.add(i);
+                player.attackPoints -= i.attackPoints;
+                System.out.println(i.getItemName()+ " is unequipped!");
+                return;
+            }
+        }
+        System.out.println("This item is not in your pockets.");
+    }
+
+    public void moveAllItems(ArrayList<Item> removeFrom,ArrayList<Item> addToo){
+        addToo.addAll(removeFrom);
+        removeFrom.clear();
+    }
+
+    public void moveEquipPoints(String action){
+        if(action.equalsIgnoreCase("add")){
+            for(Item i: player.equippedInventory){
+                player.setAttackPoints(player.attackPoints+i.getAttackPoints());
+            }
+        } else if(action.equalsIgnoreCase("remove")){
+            for(Item i: player.equippedInventory){
+                player.setAttackPoints(player.attackPoints-i.getAttackPoints());
+            }
+        }
     }
 
 
