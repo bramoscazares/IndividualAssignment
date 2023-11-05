@@ -219,17 +219,15 @@ public class Game {
         System.out.println("This item is not in your pockets.");
     } //Drops item from player inventory into Room Inventory
 
-    public void inspectItem(String itemName){
+    public Item inspectItem(String itemName){
 
         //Makes sure item is in player's inventory before printing [item name]'s description
         for(Item i: player.playerInventory){
             if (i.getItemName().equalsIgnoreCase(itemName)){
-                System.out.println("\nYou pull out the " + itemName + " from your pocket:");
-                System.out.println(i.getItemDesciption());
-                return;
+                return i;
             }
         }
-        System.out.println("This item is not in your pockets.");
+        return null;
 
     }  //Verifies and prints description of item in player's inventory
 
@@ -298,6 +296,28 @@ public class Game {
         }
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void healItem(String itemName){
+        //Checks if item is in player's inventory and adds it to room's inventory
+        for(Item i: player.playerInventory){
+            if (i.getItemName().equalsIgnoreCase(itemName)){
+                if(i.itemType.equalsIgnoreCase("consumable")){
+                    player.playerInventory.remove(i);
+                    player.setHealthPoints(player.getHealthPoints() + i.getHealthPoints());
+                    System.out.println("\nYou eat " + i.getItemName().toLowerCase()+ ".");
+                    System.out.println("HP +" + i.getHealthPoints());
+                    return;
+                } else {
+                    System.out.println("\nYou can't eat this " + player.getFirstName()+ ". It'll be very painful");
+                    return;
+                }
+            }
+        }
+        System.out.println("This item is not in your pockets.");
+    }
 
     //RANDOM TEST METHOD
     public void test(){

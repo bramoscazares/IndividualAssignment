@@ -67,7 +67,7 @@ public class Display {
         System.out.println("\n" + player.getFirstName() +" " + player.getLastname()+ ": ");
         System.out.println("---------------------------------");
         System.out.println(player.getDescription());
-        System.out.println("\nHP  : " + player.getHealthPoints());
+        System.out.println("HP  : " + player.getHealthPoints());
         System.out.println("ATK : " + player.getAttackPoints());
         System.out.println("Equipped: ");
         if(!player.equippedInventory.isEmpty()){
@@ -79,4 +79,24 @@ public class Display {
 
     }
 
+    public void characterList(ArrayList<Player> playerArrayList) {
+        System.out.println("There currently " + playerArrayList.size() + " players to choose from.");
+        for (Player player: playerArrayList){
+            System.out.println(player.getFirstName());
+        }
+    }
+
+    public void displayItemInfo(Item item) {
+        if(item != null){
+            System.out.println("\nYou pull out the " + item.getItemName().toLowerCase() + " from your pocket:");
+            System.out.println(item.getItemDesciption());
+            if (item.itemType.equalsIgnoreCase("consumable")){
+                System.out.println("This item is " + item.itemType.toLowerCase() + ". (+" + item.getHealthPoints()+ ")");
+            }
+        }else{
+            System.out.println("This item is not in your pockets.");
+        }
+
+
+    }
 }

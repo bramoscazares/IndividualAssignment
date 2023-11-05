@@ -41,7 +41,22 @@ public class Controller {
 
     private void selectPlayer() {
 
+        display.characterList(game.playerArrayList);
 
+        while (true){
+
+            System.out.print("\nSelect a player: ");
+            String userInput = input.nextLine();
+
+            for (Player player: game.playerArrayList){
+                if (player.getFirstName().equalsIgnoreCase(userInput)){
+                    game.setPlayer(player);
+                    System.out.println();
+                    return;
+                }
+            }
+            System.out.println("Player does not exist. Try again.");
+        }
 
 
     }
@@ -65,7 +80,7 @@ public class Controller {
         } else if (input.contains("pickup")) {
             game.pickupItem(item);
         } else if (input.contains("inspect")) {
-            game.inspectItem(item);
+            display.displayItemInfo(game.inspectItem(item));
         } else if (input.contains("drop")) {
             game.dropItem(item);
         } else if (input.startsWith("equip")) {
@@ -74,6 +89,8 @@ public class Controller {
             game.unequipItem(item);
         } else if (input.contains("status")) {
             display.printPlayerStatus(game.player);
+        } else if (input.startsWith("heal")) {
+            game.healItem(item);
         } else {
             System.out.println("Invalid Command. Try again.");
         }
