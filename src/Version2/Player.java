@@ -8,8 +8,17 @@ public class Player {
 
     public ArrayList<Item> equippedInventory = new ArrayList<>();
 
+    public String firstName,lastname,description;
     public int healthPoints;
     public int attackPoints;
+
+    public Player(String firstName, String lastname, String description, int healthPoints, int attackPoints) {
+        this.firstName = firstName;
+        this.lastname = lastname;
+        this.description = description;
+        this.healthPoints = healthPoints;
+        this.attackPoints = attackPoints;
+    }
 
     public int getHealthPoints() {
         return healthPoints;
@@ -25,5 +34,17 @@ public class Player {
 
     public void setAttackPoints(int attackPoints) {
         this.attackPoints = attackPoints;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

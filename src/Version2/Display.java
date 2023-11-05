@@ -64,9 +64,10 @@ public class Display {
     }
 
     public void printPlayerStatus(Player player){
-        System.out.println("\nCurrent Player Status:");
+        System.out.println("\n" + player.getFirstName() +" " + player.getLastname()+ ": ");
         System.out.println("---------------------------------");
-        System.out.println("HP  : " + player.healthPoints);
+        System.out.println(player.getDescription());
+        System.out.println("\nHP  : " + player.getHealthPoints());
         System.out.println("ATK : " + player.getAttackPoints());
         System.out.println("Equipped: ");
         if(!player.equippedInventory.isEmpty()){

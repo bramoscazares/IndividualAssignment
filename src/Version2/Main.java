@@ -13,6 +13,7 @@ public class Main {
         File items = new File("testItems.txt");
         File puzzles = new File("puzzles.txt");
         File commands = new File("UserManual.txt");
+        File players = new File("playerData.txt");
 
 
 
@@ -22,6 +23,7 @@ public class Main {
             game.populateItems(items);
             game.populatePuzzles(puzzles);
             game.populateCommands(commands);
+            game.populatePlayers(players);
             game.fillrooms();
             game.setFirstRoom();
 

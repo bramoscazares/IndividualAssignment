@@ -10,13 +10,13 @@ import java.util.Scanner;
 public class Game {
     //This Will be the 'Model' Class
 
-
+    public ArrayList<Player> playerArrayList = new ArrayList<>();
     public LinkedList<Room> roomLinkedList = new LinkedList<>();
     private ArrayList<Item> itemArrayList = new ArrayList<>();
     private ArrayList<Puzzle> puzzleArrayList = new ArrayList<>();
     public ArrayList<String> gameCommands = new ArrayList<>();
 
-    public Player player = new Player();
+    public Player player = new Player("Generic", "1","Description1",100,5);
     private Room currentRoom;
     private FileInputStream inputStream;
     private Scanner fileIn;
@@ -122,6 +122,26 @@ public class Game {
 
     public void setFirstRoom(){
         currentRoom = roomLinkedList.get(0);
+    }
+
+    public void populatePlayers(File file) throws FileNotFoundException {
+        //Scans File
+        inputStream = new FileInputStream(file);
+        fileIn = new Scanner(inputStream);
+
+        //Reads file
+        while(fileIn.hasNext()) {
+            String[] tempArray = fileIn.nextLine().split("=");
+
+            String firstName = tempArray[0];
+            String lastName = tempArray[1];
+            String description = tempArray[2];
+            int healthPoints = Integer.parseInt(tempArray[3]);
+            int attackPoints = Integer.parseInt(tempArray[4]);
+
+            playerArrayList.add(new Player(firstName,lastName,description,healthPoints,attackPoints));
+
+        }
     }
 
 

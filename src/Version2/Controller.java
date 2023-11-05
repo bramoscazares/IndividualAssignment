@@ -20,6 +20,8 @@ public class Controller {
     }
 
     public void startGame(){
+        selectPlayer();
+
         while (!gameOver){
             //Prints room description
             display.displayRoomInfo(game.getCurrentRoom());
@@ -36,6 +38,13 @@ public class Controller {
             display.printSeperator();
         }
     } //This method starts the game and loops indefinitely until user quits.
+
+    private void selectPlayer() {
+
+
+
+
+    }
 
     public void userCommand(String input){
         input = input.toLowerCase();
