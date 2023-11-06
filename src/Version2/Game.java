@@ -15,6 +15,7 @@ public class Game {
     private ArrayList<Item> itemArrayList = new ArrayList<>();
     private ArrayList<Puzzle> puzzleArrayList = new ArrayList<>();
     public ArrayList<String> gameCommands = new ArrayList<>();
+    public ArrayList<Monster> monsterArrayList = new ArrayList<>();
 
     public Player player = new Player("Generic", "1","Description1",100,5);
     private Room currentRoom;
@@ -117,6 +118,13 @@ public class Game {
                 }
             }
 
+            //Populates Room i with any monsters that correlate
+            for(Monster monster: monsterArrayList){
+                if(monster.getRoomLocation() == roomLinkedList.get(i).getRoom()){
+                    roomLinkedList.get(i).setMonster(monster);
+                }
+            }
+
         }
     } //Adds items and Puzzles into designated rooms
 
@@ -142,6 +150,26 @@ public class Game {
             playerArrayList.add(new Player(firstName,lastName,description,healthPoints,attackPoints));
 
         }
+    }
+
+    public void populateMonsters(File file) throws FileNotFoundException  {
+        //Scans File
+        inputStream = new FileInputStream(file);
+        fileIn = new Scanner(inputStream);
+
+        //Reads file
+        while(fileIn.hasNext()){
+            String[] tempArray = fileIn.nextLine().split("=");
+
+            String monsterName = tempArray[0];
+            String[] monsterDescription = tempArray[1].split(">");
+            int roomLocation = Integer.parseInt(tempArray[2]);
+            int healthPoints = Integer.parseInt(tempArray[3]);
+            int attackPoints = Integer.parseInt(tempArray[4]);
+
+            monsterArrayList.add(new Monster(monsterName,monsterDescription,roomLocation,healthPoints,attackPoints));
+        }
+
     }
 
 
@@ -319,14 +347,7 @@ public class Game {
         System.out.println("This item is not in your pockets.");
     }
 
-    //RANDOM TEST METHOD
-    public void test(){
-        for (int i = 0; i< roomLinkedList.size();i++){
-            roomLinkedList.get(i).getRoomInventory().add(itemArrayList.get(i));
-        }
+    public void fightMonster() {
+
     }
-
-
-
-
 }

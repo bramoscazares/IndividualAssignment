@@ -14,6 +14,7 @@ public class Main {
         File puzzles = new File("puzzles.txt");
         File commands = new File("UserManual.txt");
         File players = new File("playerData.txt");
+        File monsters = new File("monsters.txt");
 
 
 
@@ -24,6 +25,7 @@ public class Main {
             game.populatePuzzles(puzzles);
             game.populateCommands(commands);
             game.populatePlayers(players);
+            game.populateMonsters(monsters);
             game.fillrooms();
             game.setFirstRoom();
 

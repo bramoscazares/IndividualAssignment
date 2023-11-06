@@ -15,6 +15,8 @@ public class Room {
     private ArrayList<Item> roomInventory = new ArrayList<>();
     private Puzzle roomPuzzle;
 
+    private Monster monster;
+
 
     //CONSTRUCTOR ==============================
     public Room(int room, String roomName, String roomDescription, boolean roomVisited, int roomNorth, int roomSouth, int roomEast, int roomWest) {
@@ -113,5 +115,11 @@ public class Room {
     }
 
 
+    public void setMonster(Monster monster) {
+        this.monster = monster;
+    }
 
+    public Monster getMonster() {
+        return monster;
+    }
 }

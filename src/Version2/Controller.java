@@ -23,6 +23,9 @@ public class Controller {
         selectPlayer();
 
         while (!gameOver){
+
+            monsterCheck(); //Checks if Room has a monster
+
             //Prints room description
             display.displayRoomInfo(game.getCurrentRoom());
 
@@ -38,6 +41,7 @@ public class Controller {
             display.printSeperator();
         }
     } //This method starts the game and loops indefinitely until user quits.
+
 
     private void selectPlayer() {
 
@@ -91,8 +95,10 @@ public class Controller {
             display.printPlayerStatus(game.player);
         } else if (input.startsWith("heal")) {
             game.healItem(item);
+        } else if (input.contains("monsters")) {
+            display.printAllMonsters(game.monsterArrayList);
         } else {
-            System.out.println("Invalid Command. Try again.");
+            display.printInvaldInput();
         }
 
     } //This method processes user input
@@ -141,6 +147,49 @@ public class Controller {
         if(listString.length>1){ return listString[1]; }
 
         return string;
+    }
+
+    private void monsterCheck() {
+        if ((game.getCurrentRoom().getMonster() != null) && (!game.getCurrentRoom().getMonster().getMonsterDefeat())){
+            display.monsterIntro(game.getCurrentRoom());
+            String userInput = input.nextLine();
+            while(!userInput.equals("ignore")){
+                userMonsterCommand(userInput);
+                userInput = input.nextLine();
+            }
+        }
+    }
+
+    private void userMonsterCommand(String userInput) {
+        userInput = userInput.toLowerCase();
+        String item = splitCommand(userInput);
+
+        if(userInput.startsWith("examine")){
+            display.examineMonster(game.getCurrentRoom().getMonster());
+        } else if(userInput.startsWith("ignore")){
+            display.ignoreMonster(game.getCurrentRoom().getMonster());
+            game.getCurrentRoom().getMonster().monsterDefeated();
+        }  else if(userInput.startsWith("attack")){
+            fightMonster();
+        } else if (userInput.startsWith("equip")) {
+            game.equipItem(item);
+        } else if (userInput.startsWith("unequip")) {
+            game.unequipItem(item);
+        } else if (userInput.contains("status")) {
+            display.printPlayerStatus(game.player);
+        }  else {
+            display.printInvaldInput();
+        }
+
+    }
+
+    private void fightMonster() {
+        game.getCurrentRoom().getMonster().setHealthPoints(game.getCurrentRoom().getMonster().getHealthPoints() - game.player.getAttackPoints());
+        display.playerAttack(game.player, game.getCurrentRoom().getMonster());
+        while((game.player.getHealthPoints() > 0) || (game.getCurrentRoom().getMonster().getHealthPoints() > 0)){
+
+        }
+
     }
 
 

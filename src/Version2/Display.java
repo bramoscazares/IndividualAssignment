@@ -99,4 +99,62 @@ public class Display {
 
 
     }
+
+    public void printAllMonsters(ArrayList<Monster> monsterArrayList) {
+        System.out.println("\nTheres are all the monsters you may encounter:");
+        for(Monster m: monsterArrayList){
+            System.out.println(m.getMonsterName());
+        }
+
+    }
+
+    public void monsterIntro(Room currentRoom) {
+        Monster monster = currentRoom.getMonster();
+
+        System.out.println("\nAs you enter " + currentRoom.getRoomName()
+                + ", you encounter a " + monster.getMonsterName().toLowerCase() + ".");
+
+        System.out.println("\nWhat do you want to do?");
+    }
+
+    public void monsterTestBattle(Monster monster){
+        System.out.println();
+        for (int i = 1; i < 5; i++) {
+            System.out.println("The "+ monster.getMonsterName().toLowerCase() + " jumps " + i +" times.");
+        }
+        System.out.println("\nThe monster stands and stares at you...");
+        System.out.println("What do you want to do?");
+
+    }
+
+    public void monsterDefeat(Monster monster) {
+        System.out.println("\nYour eyes flash and the monster disappears...");
+        printSeperator();
+    }
+
+    public void examineMonster(Monster monster) {
+        System.out.println("You take a closer look at this "
+                + monster.getMonsterName().toLowerCase()
+                + "...");
+        for(String s: monster.getDescription()){
+            System.out.println(s);
+        }
+        System.out.println("Do you want to attack or ignore?\n");
+    }
+
+    public void ignoreMonster(Monster monster) {
+        System.out.println("You decide to ignore the "
+                + monster.getMonsterName().toLowerCase()
+                + "...");
+    }
+
+    public void printInvaldInput() {
+        System.out.println("Invalid input. Try again.");
+    }
+
+    public void playerAttack(Player player, Monster monster) {
+        System.out.println(player.getFirstName() + " swings at the "
+                + monster.getMonsterName().toLowerCase() + " and does -"
+                + player.getAttackPoints() + " damage.");
+    }
 }
