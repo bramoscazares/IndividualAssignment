@@ -12,7 +12,7 @@ public class Player {
     public int healthPoints;
     public int attackPoints;
 
-    public Player(String firstName, String lastname, String description, int healthPoints, int attackPoints) {
+    public Player(String firstName,String lastname, String description, int healthPoints, int attackPoints) {
         this.firstName = firstName;
         this.lastname = lastname;
         this.description = description;
@@ -40,11 +40,11 @@ public class Player {
         return firstName;
     }
 
-    public String getLastname() {
-        return lastname;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public String getLastname() {
+        return this.lastname;
     }
 }

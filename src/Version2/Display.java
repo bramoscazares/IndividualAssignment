@@ -47,7 +47,7 @@ public class Display {
 
     public void printInventory(Player player){
         if (player.playerInventory.size()>0){
-            System.out.println("You check your pockets: ");
+            System.out.println("\nYou check your pockets: ");
             for (Item item : player.playerInventory){ System.out.println(item.getItemName()); }
         } else {
             System.out.println("\nHuh? Your pockets are empty.");
@@ -60,7 +60,8 @@ public class Display {
     } //Personal styling for the user
 
     public void printCompleteRobbery(){
-        System.out.println("Congratulations! You robbed this man blind!\n\nThank you for playing!");
+        System.out.println("\nCongratulations! You robbed this man blind!\nYou win!");
+        printSeperator();
     }
 
     public void printPlayerStatus(Player player){
@@ -69,6 +70,7 @@ public class Display {
         System.out.println(player.getDescription());
         System.out.println("HP  : " + player.getHealthPoints());
         System.out.println("ATK : " + player.getAttackPoints());
+        System.out.println("Inventory: " + player.playerInventory.size());
         System.out.println("Equipped: ");
         if(!player.equippedInventory.isEmpty()){
             for(Item i: player.equippedInventory){
@@ -110,36 +112,32 @@ public class Display {
 
     public void monsterIntro(Room currentRoom) {
         Monster monster = currentRoom.getMonster();
-
-        System.out.println("\nAs you enter " + currentRoom.getRoomName()
+        System.out.println("[ ENEMY ENCOUNTER! ]");
+        System.out.println("As you enter " + currentRoom.getRoomName().toLowerCase()
                 + ", you encounter a " + monster.getMonsterName().toLowerCase() + ".");
-
-        System.out.println("\nWhat do you want to do?");
-    }
-
-    public void monsterTestBattle(Monster monster){
-        System.out.println();
-        for (int i = 1; i < 5; i++) {
-            System.out.println("The "+ monster.getMonsterName().toLowerCase() + " jumps " + i +" times.");
-        }
-        System.out.println("\nThe monster stands and stares at you...");
-        System.out.println("What do you want to do?");
 
     }
 
     public void monsterDefeat(Monster monster) {
-        System.out.println("\nYour eyes flash and the monster disappears...");
-        printSeperator();
+        System.out.println("\nYou won the battle!\nYour eyes flash and the monster disappears...");
     }
 
-    public void examineMonster(Monster monster) {
-        System.out.println("You take a closer look at this "
+    public void monsterZero(Monster monster) {
+        System.out.println("\nYou snap your fingers and the monster disappears...\nTheir presense still lingers though.");
+    }
+
+    public void examineMonster(Monster monster, Boolean canIgnore) {
+        System.out.println("\nYou take a closer look at this "
                 + monster.getMonsterName().toLowerCase()
-                + "...");
+                + "...\n");
+        System.out.println(monster.getMonsterName() +"\nHP: " + monster.getHealthPoints()
+                + " | ATK: " + monster.getAttackPoints());
         for(String s: monster.getDescription()){
             System.out.println(s);
         }
-        System.out.println("Do you want to attack or ignore?\n");
+        if(canIgnore){
+            System.out.println("\nAre you going to attack or ignore?");
+        }
     }
 
     public void ignoreMonster(Monster monster) {
@@ -153,8 +151,59 @@ public class Display {
     }
 
     public void playerAttack(Player player, Monster monster) {
+        System.out.println();
         System.out.println(player.getFirstName() + " swings at the "
                 + monster.getMonsterName().toLowerCase() + " and does -"
                 + player.getAttackPoints() + " damage.");
+
+    }
+
+    public void cannotIgnoreMonster(Monster monster) {
+        System.out.println("\nYou cannot ignore the "
+                + monster.getMonsterName().toLowerCase()
+                + " now. You have to be brave and fight on.");
+    }
+
+    public void monsterCommandPrompt(Monster monster) {
+        System.out.println("\nThe " + monster.getMonsterName().toLowerCase()
+                + " stares at you. Anticipating your next move.");
+        System.out.println("What would you like to do?");
+    }
+
+    public void attackPlayer(Monster monster, Player player) {
+        System.out.println("\nThe " + monster.getMonsterName().toLowerCase() + " swings at " + player.getFirstName()
+                +" and deals -" + monster.getAttackPoints() + " damage.");
+        if(player.getHealthPoints() < 15){
+            System.out.println("\nYou should eat something! "+ player.getFirstName() + "'s HP is running low.\n Use 'heal [item]' to heal some HP.");
+        }
+    }
+
+    public void printBadEnding(Player player) {
+        System.out.println(player.getFirstName() + " has been defeated!");
+        System.out.println("\nThe room is filled with the deafening wails of sirens, and you realize that the authorities have arrived.");
+        System.out.println("Panic grips you as you're surrounded by police officers!");
+        System.out.println("\nWith no way out, your criminal escapade comes to a disastrous end. \nYou're arrested, handcuffed, and led away from the house in defeat. \n\nYour dreams of a successful heist vanish into the cold, unforgiving reality of a jail cell.");
+        //System.out.println();
+
+    }
+
+    public void printGameOverPrompt() {
+        printSeperator();
+        System.out.println("[ GAME OVER ] \n\nWhat would you like to do?\nYou can start a new game: 'restart' or exit program: 'exit'.");
+    }
+
+    public void printExit() {
+        printSeperator();
+        System.out.println("\n\nThanks for playing!!!");
+    }
+
+    public void printPlayerMonsterHP(Monster monster, Player player) {
+        System.out.println("[ HP ] "+player.getFirstName() + ": " + player.getHealthPoints()
+                + " | " + monster.getMonsterName() + ": " + monster.getHealthPoints() );
+    }
+
+    public void monsterDoubleDamage(Monster monster) {
+        System.out.println("Watch out! This enemy powers itself up!");
+        System.out.println(monster.getMonsterName() + " now does double damage.\n");
     }
 }

@@ -3,16 +3,17 @@ package Version2;
 public class Monster {
     private String monsterName;
     private String[] description;
-    private int roomLocation,healthPoints,attackPoints;
+    private int roomLocation,healthPoints,attackPoints,threshold;
 
     private boolean defeated = false;
 
-    public Monster(String monsterName,String[] description, int roomLocation, int healthPoints, int attackPoints) {
+    public Monster(String monsterName,String[] description, int roomLocation, int healthPoints, int attackPoints,int threshold) {
         this.monsterName = monsterName;
         this.description = description;
         this.roomLocation = roomLocation;
         this.healthPoints = healthPoints;
         this.attackPoints = attackPoints;
+        this.threshold = threshold;
     }
 
     public String getMonsterName() {
@@ -44,5 +45,13 @@ public class Monster {
 
     public void setHealthPoints(int healthPoints) {
         this.healthPoints = healthPoints;
+    }
+
+    public int getThreshold() {
+        return threshold;
+    }
+
+    public void setAttackPoints(int attackPoints) {
+        this.attackPoints = attackPoints;
     }
 }

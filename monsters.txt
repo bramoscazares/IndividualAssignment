@@ -1,1 +1,1 @@
-Maid=A fancy and humanoid robot stands before you, They're boxy and move around on wheels.>This must be the person who cleans and maintains the home while the homewowner is away=2=50=20
+Robot Butler=A fancy, humanoid robot stands before you, They're boxy and move around on wheels.>This must be who cleans and maintains the home while the homewowner is away=3=50=100=25

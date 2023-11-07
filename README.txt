@@ -13,6 +13,18 @@ SETUP: -------------------------------------------------------------------------
 
 This game requires the following text files for a normal playthrough:
 
+"playerData.txt":
+    This file has all information for all the characters that the user can play as.
+    Each line in this file follows the following format, separated by "=".
+
+    [ firstName=lastName=description=roomlocation=healthPoints=attackPoints ]
+
+    firstName           - The character's first name.
+    lastName            - The character's last name.
+    description         - The character's description.
+    healthPoints        - The amount of hp points this character has.
+    attackPoints        - The amount of atk damage this character can deal.
+
 "rooms.txt":
     This file has all information for the ROOMS on the map.
     Each line in this file follows the following format, separated by "=".
@@ -30,11 +42,14 @@ This game requires the following text files for a normal playthrough:
     This file has all information for the items that will be placed in rooms.
     Each line in this file follows the following format, separated by "=".
 
-    [ itemName=itemDescription=roomlocation ]
+    [ itemName=itemDescription=roomlocation=type=healthPoints=attackPoints ]
 
     itemName            - The item name.
     itemDescription     - A short description of the item.
     roomlocation        - The item's room location.
+    type                - Item's Type. Consumable or Equippable
+    healthPoints        - The amount of hp points this item can give.
+    attackPoints        - The amount of atk points this item can give.
 
 "puzzles.txt":
     This file has all information for the puzzles that will be placed in rooms.
@@ -46,6 +61,20 @@ This game requires the following text files for a normal playthrough:
     puzzleDescription   - The puzzle's description.
     puzzleAnswer        - The correct answer to the puzzle.
     roomlocation        - The item's room location.
+
+"monsters.txt":
+    This file has all information for the monsters that will be placed in rooms.
+    Each line in this file follows the following format, separated by "=".
+
+    [ monsterName=description=roomlocation=healthPoints=attackPoints=threshold ]
+
+        monsterName         - The monster name.
+        description         - The monster's description.
+        roomlocation        - The monster's room location.
+        healthPoints        - The amount of hp points this monster has.
+        attackPoints        - The amount of atk damage this monster can deal.
+        threshold           - A int value that will be used to determine if this monster will deal
+                                double damage.
 
 MAP DETAILS: -----------------------------------------------------------------------------------------------------
 
@@ -119,16 +148,23 @@ Controller:
     This class starts and ends the game. This class also handles user input and pass it to correlated methods.
 
 Room:
-    This class hold all the room information, as well as getters and setters.
+    This class hold all the room instance information, as well as getters and setters.
 
 Item:
-    This class hold all the item information, as well as getters and setters.
+    This class hold all the item instance information, as well as getters and setters.
 
 Puzzle:
-    This class hold all the room information, as well as getters and setters.
+    This class hold all the room instance information, as well as getters and setters.
+
+Monster:
+    This class hold all the monster instance information, as well as getters and setters.
 
 Player:
-    This class will hold player information. Currently, it only an ArrayList for the player's inventory.
+    This class hold all the player instance information, as well as getters and setters.
+
+playerData.txt:
+    This file is essential for running the program. It contains the player data that this project will interpret.
+    Each data point is separated with "=".
 
 rooms.txt:
     This file is essential for running the program. It contains the room data that this project will interpret.
@@ -140,6 +176,10 @@ items.txt:
 
 puzzles.txt:
     This file is essential for running the program. It contains the puzzle data that this project will interpret.
+    Each data point is separated with "=".
+
+monster.txt:
+    This file is essential for running the program. It contains the monster data that this project will interpret.
     Each data point is separated with "=".
 
 mapFile.txt:

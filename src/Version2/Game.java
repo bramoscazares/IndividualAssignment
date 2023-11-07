@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
@@ -17,7 +18,7 @@ public class Game {
     public ArrayList<String> gameCommands = new ArrayList<>();
     public ArrayList<Monster> monsterArrayList = new ArrayList<>();
 
-    public Player player = new Player("Generic", "1","Description1",100,5);
+    public Player player = new Player("Generic","Player","Description1",100,5);
     private Room currentRoom;
     private FileInputStream inputStream;
     private Scanner fileIn;
@@ -142,12 +143,12 @@ public class Game {
             String[] tempArray = fileIn.nextLine().split("=");
 
             String firstName = tempArray[0];
-            String lastName = tempArray[1];
+            String lastname = tempArray[1];
             String description = tempArray[2];
             int healthPoints = Integer.parseInt(tempArray[3]);
             int attackPoints = Integer.parseInt(tempArray[4]);
 
-            playerArrayList.add(new Player(firstName,lastName,description,healthPoints,attackPoints));
+            playerArrayList.add(new Player(firstName,lastname,description,healthPoints,attackPoints));
 
         }
     }
@@ -166,8 +167,9 @@ public class Game {
             int roomLocation = Integer.parseInt(tempArray[2]);
             int healthPoints = Integer.parseInt(tempArray[3]);
             int attackPoints = Integer.parseInt(tempArray[4]);
+            int threshold = Integer.parseInt(tempArray[5]);
 
-            monsterArrayList.add(new Monster(monsterName,monsterDescription,roomLocation,healthPoints,attackPoints));
+            monsterArrayList.add(new Monster(monsterName,monsterDescription,roomLocation,healthPoints,attackPoints,threshold));
         }
 
     }
@@ -178,19 +180,19 @@ public class Game {
 
         //processes direction;
         if (movement.equalsIgnoreCase("n") || movement.equalsIgnoreCase("north")) {
-            System.out.println("You head north.");
+            System.out.println("\nYou head north.");
             checkMove(currentRoom.getRoomNorth());
         } else if (movement.equalsIgnoreCase("s") || movement.equalsIgnoreCase("south")) {
-            System.out.println("You head south.");
+            System.out.println("\nYou head south.");
             checkMove(currentRoom.getRoomSouth());
         } else if (movement.equalsIgnoreCase("e") || movement.equalsIgnoreCase("east")) {
-            System.out.println("You head east.");
+            System.out.println("\nYou head east.");
             checkMove(currentRoom.getRoomEast());
         } else if (movement.equalsIgnoreCase("w") || movement.equalsIgnoreCase("west")) {
-            System.out.println("You head west.");
+            System.out.println("\nYou head west.");
             checkMove(currentRoom.getRoomWest());
         } else {
-            System.out.println("Not a real direction. Try again.\n\n");
+            System.out.println("\nNot a real direction. Try again.\n\n");
         }
 
     } //Processes which direction user inputted
@@ -211,6 +213,7 @@ public class Game {
 
         if (itemName.equalsIgnoreCase("all")){
             moveAllItems(currentRoom.getRoomInventory(),player.playerInventory);
+            System.out.println("You pickup all the items from the room.");
             return;
         }
 
@@ -230,6 +233,7 @@ public class Game {
 
         if (itemName.equalsIgnoreCase("all")){
             moveAllItems(player.playerInventory,currentRoom.getRoomInventory());
+            System.out.println("You drop all the items in your inventory.");
             return;
         }
 
@@ -269,6 +273,7 @@ public class Game {
         if (itemName.equalsIgnoreCase("all")){
             moveAllItems(player.playerInventory,player.equippedInventory);
             moveEquipPoints("add");
+            System.out.println("You equip all the items in your inventory.");
             return;
         }
 
@@ -279,7 +284,7 @@ public class Game {
                 player.playerInventory.remove(i);
                 //player.attackPoints += i.behaviorPoints;
                 player.setAttackPoints(player.attackPoints +i.getAttackPoints());
-                System.out.println(i.getItemName()+ " is equipped!");
+                System.out.println(i.getItemName()+ " is equipped! (+"+ i.getAttackPoints() + "ATK)");
                 return;
             }
         }
@@ -291,6 +296,7 @@ public class Game {
         if (itemName.equalsIgnoreCase("all")){
             moveEquipPoints("remove");
             moveAllItems(player.equippedInventory,player.playerInventory);
+            System.out.println("You unequip all your gear into your inventory.");
             return;
         }
 
@@ -300,7 +306,7 @@ public class Game {
                 player.equippedInventory.remove(i);
                 player.playerInventory.add(i);
                 player.attackPoints -= i.attackPoints;
-                System.out.println(i.getItemName()+ " is unequipped!");
+                System.out.println(i.getItemName()+ " is unequipped!(-"+ i.getAttackPoints() + "ATK)");
                 return;
             }
         }
@@ -347,7 +353,36 @@ public class Game {
         System.out.println("This item is not in your pockets.");
     }
 
-    public void fightMonster() {
+    public void attackMonster() {
+        currentRoom.getMonster().setHealthPoints(currentRoom.getMonster().getHealthPoints()- player.getAttackPoints());
+        if(currentRoom.getMonster().getHealthPoints()<=0){
+            currentRoom.getMonster().monsterDefeated();
+        }
+    }
 
+    public void attackPlayer() {
+        player.setHealthPoints(player.healthPoints- currentRoom.getMonster().getAttackPoints());
+    }
+
+    public boolean playerCheck() {
+        if (player.getHealthPoints() > 0) {return true;}
+        return false;
+    }
+
+    public boolean monsterCheck() {
+        if ((currentRoom.getMonster().getHealthPoints() > 0) && (!currentRoom.getMonster().getMonsterDefeat())){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean monsterThresholdCheck() {
+        Random random = new Random();
+        int randInt = random.nextInt(100);
+        if (randInt <= currentRoom.getMonster().getThreshold()){
+            currentRoom.getMonster().setAttackPoints(currentRoom.getMonster().getAttackPoints() * 2);
+            return true;
+        }
+        return false;
     }
 }

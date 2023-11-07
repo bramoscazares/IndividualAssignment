@@ -1,16 +1,19 @@
 package Version2;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Controller {
     //This is my 'Controller' Class
 
-
+    ArrayList<File> gameFiles = new ArrayList<>();
     private Game game;
     private Display display;
     private Scanner input;
     private boolean gameOver = false;
-
+    private boolean startOver = true;
 
     public Controller(Game game, Display display){
         this.game = game;
@@ -19,25 +22,44 @@ public class Controller {
 
     }
 
-    public void startGame(){
-        selectPlayer();
+    public void startGame() throws FileNotFoundException {
+        while(startOver) {
+            selectPlayer();
+            display.printSeperator();
 
-        while (!gameOver){
+            while (!gameOver) {
 
-            monsterCheck(); //Checks if Room has a monster
+                monsterCheck(); //Checks if Room has a monster
+                if (!game.playerCheck()) {
+                    display.printBadEnding(game.player);
+                    gameOver = !gameOver;
+                    break;
+                }
 
-            //Prints room description
-            display.displayRoomInfo(game.getCurrentRoom());
+                //Prints room description
+                display.displayRoomInfo(game.getCurrentRoom());
 
 
-            puzzleCheck(); //Checks if Room has a puzzle
-            //checkInventory();
+                puzzleCheck(); //Checks if Room has a puzzle
+                //checkInventory();
 
-            System.out.println("What would you like to do? Type 'help' for commands.");
-            String userInput = input.nextLine();
 
-            //Passes user input
-            userCommand(userInput);
+                System.out.println("What would you like to do? Type 'help' for commands.");
+                String userInput = input.nextLine();
+
+                //Passes user input
+                userCommand(userInput);
+
+
+                //checks if player has picked up ALL items
+                if(game.inventoryCheck()){
+//                    display.printCompleteRobbery();
+//                    gameOver = !gameOver;
+//                    break;
+                }
+                display.printSeperator();
+            }
+            gameOver();
             display.printSeperator();
         }
     } //This method starts the game and loops indefinitely until user quits.
@@ -51,6 +73,8 @@ public class Controller {
 
             System.out.print("\nSelect a player: ");
             String userInput = input.nextLine();
+
+            if(userInput.isEmpty()){return;}
 
             for (Player player: game.playerArrayList){
                 if (player.getFirstName().equalsIgnoreCase(userInput)){
@@ -134,13 +158,6 @@ public class Controller {
         System.out.println("Failed to solve.\nDang, I'll try later.");
     }  //Main Puzzle Interface
 
-    public void checkInventory(){
-        if(game.inventoryCheck()){
-            gameOver = true;
-            display.printCompleteRobbery();
-        }
-    }
-
     public String splitCommand(String string){
         String[] listString = string.split(" ");
 
@@ -152,45 +169,118 @@ public class Controller {
     private void monsterCheck() {
         if ((game.getCurrentRoom().getMonster() != null) && (!game.getCurrentRoom().getMonster().getMonsterDefeat())){
             display.monsterIntro(game.getCurrentRoom());
-            String userInput = input.nextLine();
-            while(!userInput.equals("ignore")){
-                userMonsterCommand(userInput);
-                userInput = input.nextLine();
-            }
+            monsterMode(game.getCurrentRoom().getMonster());
         }
     }
 
-    private void userMonsterCommand(String userInput) {
+    private void userMonsterCommand(String userInput,Boolean canIgnore) {
         userInput = userInput.toLowerCase();
         String item = splitCommand(userInput);
 
         if(userInput.startsWith("examine")){
-            display.examineMonster(game.getCurrentRoom().getMonster());
-        } else if(userInput.startsWith("ignore")){
+            display.examineMonster(game.getCurrentRoom().getMonster(), canIgnore);
+        } else if (userInput.equalsIgnoreCase("help")) {
+            display.displayHelp(game.gameCommands);
+        } else if(userInput.startsWith("ignore") && canIgnore){
             display.ignoreMonster(game.getCurrentRoom().getMonster());
             game.getCurrentRoom().getMonster().monsterDefeated();
+        }  else if(userInput.startsWith("ignore") && !canIgnore){
+            display.cannotIgnoreMonster(game.getCurrentRoom().getMonster());
         }  else if(userInput.startsWith("attack")){
-            fightMonster();
+            game.attackMonster();
+            display.playerAttack(game.player,game.getCurrentRoom().getMonster());
+            if(game.monsterCheck()){
+                display.attackPlayer(game.getCurrentRoom().getMonster(), game.player);
+                game.attackPlayer();
+            }else {
+                display.monsterDefeat(game.getCurrentRoom().getMonster());
+            }
         } else if (userInput.startsWith("equip")) {
             game.equipItem(item);
         } else if (userInput.startsWith("unequip")) {
             game.unequipItem(item);
         } else if (userInput.contains("status")) {
             display.printPlayerStatus(game.player);
-        }  else {
+        } else if (userInput.contains("inventory")) {
+            display.printInventory(game.player);
+        } else if (userInput.startsWith("heal")) {
+            game.healItem(item);
+        } else if (userInput.contains("zero")) {
+//            display.monsterZero(game.getCurrentRoom().getMonster());
+//            game.getCurrentRoom().getMonster().setHealthPoints(0);
+        } else {
             display.printInvaldInput();
         }
 
     }
 
-    private void fightMonster() {
-        game.getCurrentRoom().getMonster().setHealthPoints(game.getCurrentRoom().getMonster().getHealthPoints() - game.player.getAttackPoints());
-        display.playerAttack(game.player, game.getCurrentRoom().getMonster());
-        while((game.player.getHealthPoints() > 0) || (game.getCurrentRoom().getMonster().getHealthPoints() > 0)){
-
+    private void monsterMode(Monster monster) {
+        display.monsterCommandPrompt(monster);
+        String userInput = input.nextLine();
+        userMonsterCommand(userInput,true);
+        display.printSeperator();
+        if (game.monsterThresholdCheck()){
+            display.monsterDoubleDamage(monster);
+        }
+        while((game.playerCheck()) && (game.monsterCheck())){
+            display.printPlayerMonsterHP(game.getCurrentRoom().getMonster(), game.player);
+//            if (!game.playerCheck()){
+//                gameOver = true;
+//                display.printBadEnding(game.player);
+//                return;
+//            }
+            display.monsterCommandPrompt(monster);
+            userInput = input.nextLine();
+            userMonsterCommand(userInput,false);
+            display.printSeperator();
         }
 
     }
 
+    private void gameOver() throws FileNotFoundException {
+        display.printGameOverPrompt();
+        String userInput = input.nextLine();
+        while (true){
+            if (userInput.equalsIgnoreCase("exit")){
+                display.printExit();
+                this.startOver = false;
+                break;
+            } else if (userInput.equalsIgnoreCase("restart")) {
+                restart();
+                break;
+            }
+            else {
+                display.printInvaldInput();
+            }
+            userInput = input.nextLine();
+        }
+    }
 
+    private void restart() throws FileNotFoundException {
+        gameOver = !gameOver;
+        game = new Game();
+        setupGame();
+        display.printSeperator();
+    }
+
+
+    public void addGameFiles(File rooms, File items, File puzzles, File commands, File players, File monsters) {
+        gameFiles.add(rooms);
+        gameFiles.add(items);
+        gameFiles.add(puzzles);
+        gameFiles.add(commands);
+        gameFiles.add(players);
+        gameFiles.add(monsters);
+    }
+
+    public void setupGame() throws FileNotFoundException {
+        game.populateRooms(gameFiles.get(0));
+        game.populateItems(gameFiles.get(1));
+        game.populatePuzzles(gameFiles.get(2));
+        game.populateCommands(gameFiles.get(3));
+        game.populatePlayers(gameFiles.get(4));
+        game.populateMonsters(gameFiles.get(5));
+        game.fillrooms();
+        game.setFirstRoom();
+    }
 }

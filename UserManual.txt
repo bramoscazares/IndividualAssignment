@@ -1,12 +1,34 @@
 This is a list of all game commands:
 [Command name]      -[Command Description]
 --------------------------------------------------------------------------------------------------------------
-'help'              - Prints a list of all availible commands implemented for this game.
-'rooms'             - Prints a list of all availible rooms on this map.
+[WHEN IN A ROOM, NO MONSTER ENCOUNTER]
+'help'              - Prints a list of all available commands implemented for this game.
+'rooms'             - Prints a list of all available rooms on this map.
 'go [direction]'    - Moves the player to the [north/south/east/west] direction. You can also input [n/s/e/w].
 'explore'           - Prints all available items in a room, if the room has any.
 'pickup [item]'     - Picks up [item name] in a room and adds it to player's inventory, provided the room has the item.
 'inventory'         - Prints a list of all items in the player's inventory.
 'inspect [item]'    - Prints a description of [item name] provided that the item is in the player's inventory.
 'drop [item]'       - Drops [item name] from player's inventory and into the current room.
+'monsters'          - Prints a list of all encounter-able monsters on this map.
+'equip [item]'      - Equip [item] regardless if its type, removed from player inventory
+'unequip [item]'    - Unequip [item] and gets added to player inventory.
+'heal [item]'       - Recover HP, only if item is 'Consumable' type and in player's inventory.
+'status'            - Prints player full bio. (Name, description, HP & ATK, Inventory size, Equipped list)
+'quit'              - Ends the current game.
+
+[DURING MONSTER ENCOUNTER]
+'help'              - Prints a list of all available commands implemented for this game.
+'examine'           - Prints Monster Info (Name, HP and Attack, Description)
+'ignore'            - Allows player to ignore monster, monster disappears from game entirely. Can only be used during first move.
+'attack'            - Attack the monster and deal damage. The monster will also attack back.
+'heal [item]'       - Recover HP, only if item is 'Consumable' type and in player's inventory.
+'equip [item]'      - Equip [item] regardless if its type, removed from player inventory
+'unequip [item]'    - Unequip [item] and gets added to player inventory.
+'status'            - Prints player full bio. (Name, description, HP & ATK, Inventory size, Equipped list)
+'inventory'         - Prints a list of all items in the player's inventory.
+
+[GAME OVER]
+'restart'           - Restarts the entire game from the very beginning.
+'exit'              - Exits the program entirely.
 --------------------------------------------------------------------------------------------------------------
